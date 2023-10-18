@@ -2,9 +2,7 @@
 
 <br />
 
-## 프로젝트 소개
-
-<hr />
+## 🚇 프로젝트 소개
 
 > 💡 **너 T야??**
 
@@ -17,26 +15,24 @@
 
 <br />
 
-## 기술스택
-
-<hr />
+## 🔨 기술스택
 
 <img src="https://img.shields.io/badge/html5-E34F26?style=for-the-badge&logo=html5&logoColor=white"> <img src="https://img.shields.io/badge/tailwind-1572B6?style=for-the-badge&logo=tailwindcss&logoColor=white"> <img alt="Recoil" src ="https://img.shields.io/badge/Recoil-3578E5.svg?&style=for-the-badge&logo=Recoil&logoColor=white"/> <img alt="Firebase" src ="https://img.shields.io/badge/Firebase-FFCA28.svg?&style=for-the-badge&logo=Firebase&logoColor=white"/> <img alt="React" src ="https://img.shields.io/badge/React-61DAFB.svg?&style=for-the-badge&logo=React&logoColor=white"/> <img alt="TypeScript" src ="https://img.shields.io/badge/TypeScript-3178C6.svg?&style=for-the-badge&logo=TypeScript&logoColor=white"/> <img alt="Figma" src ="https://img.shields.io/badge/Figma-F24E1E.svg?&style=for-the-badge&logo=Figma&logoColor=white"/> <img alt="Vite" src ="https://img.shields.io/badge/Vite-646CFF.svg?&style=for-the-badge&logo=Figma&logoColor=white"/> <img alt="Framer" src ="https://img.shields.io/badge/Framer-0055FF.svg?&style=for-the-badge&logo=Framer&logoColor=white"/>
 
 <br />
 
-## 개발기간
-
-<hr />
+## 📆 개발기간
 
 준비중입니다..💤
 
 <br />
 
-## 기능소개
-
-<hr />
+## ⛵ 기능소개
 
 준비중입니다..💤
 
 <br />
+
+## 👹 트러블슈팅
+
+준비중입니다..💤
