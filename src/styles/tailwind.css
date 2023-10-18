@@ -1,0 +1,24 @@
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
+
+@font-face {
+  font-family: Pretendard;
+  src: url("https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff")
+    format("woff");
+}
+
+@layer base {
+  html {
+    font-family: Pretendard;
+    font-size: 1rem;
+    font-display: swap;
+    @screen tablet {
+      font-size: 0.875rem;
+    }
+
+    @screen mobile {
+      font-size: 0.75rem;
+    }
+  }
+}
