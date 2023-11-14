@@ -1,7 +1,17 @@
-function Button() {
+import {ReactNode} from "react";
+
+interface IButtonProps {
+  type?: "button" | "submit" | "reset";
+  children: ReactNode;
+  [props: string]: unknown;
+}
+
+function Button({type = "button", children, ...restProps}: IButtonProps) {
   return (
     <>
-      <div>Button</div>
+      <button type={type} {...restProps}>
+        {children}
+      </button>
     </>
   );
 }

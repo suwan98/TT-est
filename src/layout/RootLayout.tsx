@@ -7,9 +7,7 @@ function RootLayout() {
     <>
       <RootLayoutWrapper>
         <ToggleThemeButton />
-        <main>
-          <Outlet />
-        </main>
+        <Outlet />
       </RootLayoutWrapper>
     </>
   );
