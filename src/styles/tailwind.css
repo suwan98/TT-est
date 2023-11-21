@@ -8,6 +8,11 @@
     format("woff");
 }
 
+@font-face {
+  font-family: "Dote";
+  src: url("./../assets/fonts/DungGeunMo OTF/DungGeunMo.otf") format("woff");
+}
+
 @layer base {
   html {
     font-family: Pretendard;

@@ -1,0 +1,39 @@
+function CopyIcon() {
+  return (
+    <>
+      <svg
+        width="22"
+        height="22"
+        viewBox="0 0 25 25"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+        stroke="currentColor">
+        <g id="Basic / Link">
+          <path
+            id="Vector"
+            d="M9.91016 15.6178L15.567 9.96094"
+            stroke="white"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"></path>
+          <path
+            id="Vector_2"
+            d="M7.78842 12.082L6.37421 13.4962C4.81211 15.0583 4.81211 17.591 6.37421 19.1531C7.93631 20.7152 10.469 20.7152 12.0311 19.1531L13.4453 17.7389"
+            stroke="white"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"></path>
+          <path
+            id="Vector_3"
+            d="M12.0312 7.8392L13.4455 6.42499C15.0076 4.86289 17.5402 4.86289 19.1023 6.42499C20.6644 7.98709 20.6644 10.5197 19.1023 12.0818L17.6881 13.4961"
+            stroke="white"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"></path>
+        </g>
+      </svg>
+    </>
+  );
+}
+
+export default CopyIcon;

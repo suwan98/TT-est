@@ -1,5 +1,5 @@
 import {useEffect, useState} from "react";
-import {IQuestion} from "../@types/fireStoreDataType";
+import {IQuestion} from "../types/fireStoreDataType";
 import {doc, getDoc} from "firebase/firestore/lite";
 import {db} from "@/config/firebaseConfig";
 
