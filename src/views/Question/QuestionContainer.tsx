@@ -7,14 +7,11 @@ import ChoiceButton from "@/components/common/ChoiceButton";
 
 function QuestionContainer() {
   const {questionId} = useParams();
-  console.log(questionId);
   /* 단일 질문 렌더링 */
   const {singleQuestion, fetchQuestion} = useFireStoreData();
   useEffect(() => {
     fetchQuestion(questionId!);
   }, [questionId]);
-
-  console.log(singleQuestion);
 
   return (
     <>
@@ -25,8 +22,10 @@ function QuestionContainer() {
             <ul key={question.id}>
               <SpeechBubbleStart chatText={question.question} />
               <SpeechBubbleEnd chatAnswer={question.answer} />
-              <ChoiceButton>{question.choices[0]}</ChoiceButton>
-              <ChoiceButton>{question.choices[1]}</ChoiceButton>
+              <div className="mt-20">
+                <ChoiceButton>{question.choices[0]}</ChoiceButton>
+                <ChoiceButton>{question.choices[1]}</ChoiceButton>
+              </div>
             </ul>
           ))}
       </div>
