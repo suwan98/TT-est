@@ -42,7 +42,10 @@ function Question() {
 
   return (
     <>
-      <QuestionContainer />
+      <QuestionContainer
+        currentIndex={currentIndex!}
+        isLastIndex={isLastIndex}
+      />
       {isLastIndex ? (
         <Button
           className="mt-6 border p-4 bg-[#e5e8eb] rounded-2xl text-[##888a8d] hover:bg-[#ced1d3] w-[40rem] font-semibold text-2xl"

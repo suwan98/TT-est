@@ -9,12 +9,12 @@ import useFireStoreData from "@/hooks/useFireStoreData";
 function Home() {
   /* theme 적용 */
   const theme = useRecoilValue(themeState);
-  const lightTheme = "bg-black text-white hover:bg-stone-950";
-  const blackTheme = "bg-white text-black hover:bg-slate-100";
+  const lightTheme = "bg-[#222222] text-white hover:bg-black";
+  const blackTheme = "bg-[#fff6f6] text-black hover:bg-[#ffffff]";
   const isTheme = theme === "light" ? lightTheme : blackTheme;
 
   /*  QuestionData 가져오기 */
-  const {fetchQuestion, questions} = useFireStoreData();
+  const {questions} = useFireStoreData();
   const firstPageId = questions && questions[0].id;
 
   /* Question 페이지로 이동 */
@@ -37,7 +37,7 @@ function Home() {
 
       <Button
         onClick={handleMoveQuestionPage(firstPageId)}
-        className={`${isTheme} border my-6 rounded-lg p-4 font-alice font-bold`}>
+        className={`${isTheme} border-none my-6 rounded-lg p-5 font-alice font-bold shadow-2xl`}>
         T력 테스트하러 가기!
       </Button>
       <ShareButtons />

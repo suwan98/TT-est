@@ -8,7 +8,7 @@ interface IChoiceButton {
 function ChoiceButton({children}: IChoiceButton) {
   return (
     <>
-      <Button className="border w-full rounded-2xl p-4 bg-sky-100 hover:bg-sky-200 border-none my-4 font-ganwon text-xl text-zinc-950 text-center">
+      <Button className="border w-full rounded-2xl p-4 bg-sky-100 hover:bg-[#759cbe] border-none my-4 font-ganwon text-xl text-zinc-950 text-center">
         {children}
       </Button>
     </>
