@@ -13,13 +13,13 @@ function Home() {
   const blackTheme = "bg-white text-black hover:bg-slate-100";
   const isTheme = theme === "light" ? lightTheme : blackTheme;
 
-  /* Data 추출 */
-  const questions = useFireStoreData();
-  const [firstQuestion = {}] = questions || [];
-  const {id = null} = firstQuestion;
+  /*  QuestionData 가져오기 */
+  const {fetchQuestion, questions} = useFireStoreData();
+  const firstPageId = questions && questions[0].id;
+
   /* Question 페이지로 이동 */
   const navigate = useNavigate();
-  const handleMoveQuestionPage = (id: string) => () => {
+  const handleMoveQuestionPage = (id: string | null) => () => {
     navigate(`/question/${id}`);
   };
 
@@ -36,7 +36,7 @@ function Home() {
       <p className="font-dote text-2xl">6가지 문제로 알아보는 T력 테스트</p>
 
       <Button
-        onClick={handleMoveQuestionPage(id)}
+        onClick={handleMoveQuestionPage(firstPageId)}
         className={`${isTheme} border my-6 rounded-lg p-4 font-alice font-bold`}>
         T력 테스트하러 가기!
       </Button>
