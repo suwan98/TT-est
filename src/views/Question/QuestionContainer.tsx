@@ -10,6 +10,8 @@ function QuestionContainer() {
   const {questionId} = useParams();
   /* 단일 질문 렌더링 */
   const {singleQuestion, fetchQuestion} = useFireStoreData();
+
+  /* 질문 로딩 시간 로직 구성 */
   useEffect(() => {
     fetchQuestion(questionId!);
   }, [questionId]);
