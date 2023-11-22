@@ -13,6 +13,11 @@
   src: url("./../assets/fonts/DungGeunMo OTF/DungGeunMo.otf") format("woff");
 }
 
+@font-face {
+  font-family: "Elice DX Neolli";
+  src: url("https://font.elice.io/css?family=Elice+DX+Neolli");
+}
+
 @layer base {
   html {
     font-family: Pretendard;

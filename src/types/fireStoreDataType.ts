@@ -1,6 +1,6 @@
 export interface IQuestion {
   question: string;
   choices: string[];
-  title: string;
+  answer: string;
   id: string;
 }

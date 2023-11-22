@@ -21,8 +21,14 @@ function ToggleThemeButton() {
 
   return (
     <>
-      <button onClick={handleToggleTheme}>
-        {theme === "light" ? <BsFillSunFill /> : <BsFillMoonFill />}
+      <button
+        onClick={handleToggleTheme}
+        className={`absolute top-0 right-0 m-8 hover:scale-150`}>
+        {theme === "light" ? (
+          <BsFillSunFill size="24px" color="orange" />
+        ) : (
+          <BsFillMoonFill size="24px" />
+        )}
       </button>
     </>
   );

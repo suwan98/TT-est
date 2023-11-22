@@ -5,6 +5,7 @@ export default {
     extend: {
       fontFamily: {
         dote: ["Dote"],
+        alice: ["Elice DX Neolli"],
       },
       screens: {
         mobile: {max: "727px"},

@@ -1,22 +1,25 @@
 import {useEffect, useState} from "react";
 import {IQuestion} from "../types/fireStoreDataType";
-import {doc, getDoc} from "firebase/firestore/lite";
+import {collection, getDocs} from "firebase/firestore/lite";
 import {db} from "@/config/firebaseConfig";
 
-const useFireStoreData = (documentNumber: number) => {
-  const [data, setData] = useState<IQuestion | null>(null);
+const useFireStoreData = () => {
+  const [questions, setQuestions] = useState<IQuestion | null>(null);
 
   useEffect(() => {
-    async function fetchFirestoreData() {
-      const docRef = doc(db, "questions", `Question${documentNumber}`);
-      const docSnapShot = await getDoc(docRef);
-      setData(docSnapShot.data() as IQuestion);
-    }
+    const fetchQuestions = async () => {
+      const questionCollection = collection(db, "questions");
+      const questionSnapShot = await getDocs(questionCollection);
+      const questions = questionSnapShot.docs.map((doc) => ({
+        id: doc.id,
+        ...doc.data(),
+      }));
+      setQuestions(questions);
+    };
+    fetchQuestions();
+  }, []);
 
-    fetchFirestoreData();
-  }, [documentNumber]);
-
-  return data;
+  return questions;
 };
 
 export default useFireStoreData;
