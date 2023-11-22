@@ -4,9 +4,15 @@
 
 ## 🚇 프로젝트 소개
 
+<br />
+<br />
+
 <p style='align-center'>
     <img src='/public/readme/thumbnail.png'>
 </p>
+
+<br />
+<br />
 
 > 💡 **너 T야??**
 
@@ -44,4 +50,4 @@
 
 ## 👹 트러블슈팅
 
-준비중입니다..💤
+- 준비중입니다..💤
