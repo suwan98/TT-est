@@ -6,6 +6,9 @@ import {QUESTIONS} from "@/constants/constants";
 
 const useFireStoreData = () => {
   const [questions, setQuestions] = useState<IQuestion[] | null>(null);
+  const [singleQuestion, setSingleQuestion] = useState<IQuestion[] | null>(
+    null
+  );
 
   /* FireStore Data 전체 가져오기 */
   const fetchAllQuestions = async () => {
@@ -24,10 +27,10 @@ const useFireStoreData = () => {
     const questionDocument = doc(db, QUESTIONS, id);
     const questionSnapShot = await getDoc(questionDocument);
     questionSnapShot.exists()
-      ? setQuestions([
+      ? setSingleQuestion([
           {
             id: questionSnapShot.id,
-            question: questionSnapShot.data().qustion,
+            question: questionSnapShot.data().question,
             choices: questionSnapShot.data().choices,
             answer: questionSnapShot.data().answer,
           },
@@ -43,6 +46,7 @@ const useFireStoreData = () => {
     fetchAllQuestions,
     fetchQuestion,
     questions,
+    singleQuestion,
   };
 };
 
