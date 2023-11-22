@@ -6,7 +6,7 @@ module.exports = {
       fontFamily: {
         dote: ["Dote"],
         alice: ["Elice DX Neolli"],
-        soyo: ["SOYOMapleBoldTTF"],
+        ganwon: ["GangwonEdu_OTFBoldA"],
       },
       screens: {
         mobile: {max: "727px"},

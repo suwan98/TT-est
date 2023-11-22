@@ -7,7 +7,7 @@ interface WrapperProps {
 
 function RootLayoutWrapper({children}: WrapperProps) {
   const theme = useRecoilValue(themeState);
-  const lightTheme = "bg-white text-black";
+  const lightTheme = "bg-slate-100 text-black";
   const blackTheme = "bg-black text-white";
   const isTheme = theme === "light" ? lightTheme : blackTheme;
 

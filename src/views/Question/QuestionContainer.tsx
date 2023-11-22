@@ -4,6 +4,7 @@ import {useParams} from "react-router-dom";
 import SpeechBubbleStart from "./SpeechBubbleStart";
 import SpeechBubbleEnd from "./SppechBubbleEnd";
 import ChoiceButton from "@/components/common/ChoiceButton";
+import QuestionContainerFooter from "@/layout/QuestionContainerFooter";
 
 function QuestionContainer() {
   const {questionId} = useParams();
@@ -16,7 +17,7 @@ function QuestionContainer() {
   return (
     <>
       <div
-        className={`flex items-center justify-center p-4 h-[40rem] w-[40rem] rounded-3xl border overflow-y-auto bg-[#b2c7da]`}>
+        className={`flex flex-col items-center relative justify-center p-4 h-[40rem] w-[40rem] rounded-t-3xl border overflow-y-auto bg-[#b2c7da] border-b-0`}>
         {singleQuestion &&
           singleQuestion.map((question) => (
             <ul key={question.id}>
@@ -28,6 +29,7 @@ function QuestionContainer() {
               </div>
             </ul>
           ))}
+        <QuestionContainerFooter />
       </div>
     </>
   );

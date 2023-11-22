@@ -19,10 +19,10 @@
 }
 
 @font-face {
-  font-family: "SOYOMapleBoldTTF";
-  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2310@1.0/SOYOMapleBoldTTF.woff2")
-    format("woff2");
-  font-weight: 700;
+  font-family: "GangwonEdu_OTFBoldA";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2201-2@1.0/GangwonEdu_OTFBoldA.woff")
+    format("woff");
+  font-weight: normal;
   font-style: normal;
 }
 
@@ -30,6 +30,7 @@
   html {
     font-family: Pretendard;
     font-size: 1rem;
+    letter-spacing: 0.65px;
     font-display: swap;
     @screen tablet {
       font-size: 0.875rem;

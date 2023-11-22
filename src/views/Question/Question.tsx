@@ -20,14 +20,24 @@ function Question() {
   };
 
   /* 마지막 질문 상태 */
-  const isLastIndex = "";
+  const isLastIndex = questions && currentIndex === questions?.length - 1;
+  const handleMoveResultPage = () => {
+    // todo : Result 페이지 이동시 로딩 스피너 및 시간 (2초?) 구현
+    navigate("/result");
+  };
 
   return (
     <>
       <QuestionContainer />
-      <Button className="mt-6" onClick={handleMoveNextQuestion}>
-        다음 질문으로 이동!
-      </Button>
+      {isLastIndex ? (
+        <Button className="mt-6" onClick={handleMoveResultPage}>
+          최종 결과보기
+        </Button>
+      ) : (
+        <Button className="mt-6" onClick={handleMoveNextQuestion}>
+          다음 질문으로 이동!
+        </Button>
+      )}
     </>
   );
 }
