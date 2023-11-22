@@ -26,8 +26,8 @@ function QuestionContainer() {
               <SpeechBubbleStart chatText={question.question} />
               <SpeechBubbleEnd chatAnswer={question.answer} />
               <div className="mt-20">
-                <ChoiceButton>{question.choices[0]}</ChoiceButton>
-                <ChoiceButton>{question.choices[1]}</ChoiceButton>
+                <ChoiceButton>{question.choices.T}</ChoiceButton>
+                <ChoiceButton>{question.choices.F}</ChoiceButton>
               </div>
             </ul>
           ))}
