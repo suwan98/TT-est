@@ -11,7 +11,7 @@ function Home() {
   const theme = useRecoilValue(themeState);
   const lightTheme = "bg-[#222222] text-white hover:bg-black";
   const blackTheme = "bg-[#fff6f6] text-black hover:bg-[#ffffff]";
-  const isTheme = theme === "light" ? lightTheme : blackTheme;
+  const buttonTheme = theme === "light" ? lightTheme : blackTheme;
 
   /*  QuestionData 가져오기 */
   const {questions} = useFireStoreData();
@@ -37,7 +37,7 @@ function Home() {
 
       <Button
         onClick={handleMoveQuestionPage(firstPageId)}
-        className={`${isTheme} border-none my-6 rounded-lg p-5 font-alice font-bold shadow-2xl`}>
+        className={`${buttonTheme} border-none my-6 rounded-lg p-5 font-alice font-bold shadow-2xl`}>
         T력 테스트하러 가기!
       </Button>
       <ShareButtons />

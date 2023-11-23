@@ -2,7 +2,7 @@ import {useNavigate, useParams} from "react-router-dom";
 import QuestionContainer from "./QuestionContainer";
 import Button from "./../../components/common/Button";
 import useFireStoreData from "@/hooks/useFireStoreData";
-import {useEffect} from "react";
+import {useEffect, useState} from "react";
 import useLoadingDelay from "@/hooks/useLoadingDelay";
 import Loading from "../Loading/Loading";
 
@@ -12,13 +12,11 @@ function Question() {
 
   /* 클릭 시 다음 질문으로 넘어가는 로직 구성 */
   const {questions, fetchQuestion} = useFireStoreData();
-  const getCurrentQuestionIndex = (id: string) => {
-    return questions?.findIndex((question) => question.id === id);
-  };
 
-  const currentIndex = getCurrentQuestionIndex(questionId!);
+  const [currentIndex, setCurrentIndex] = useState(0);
   const handleMoveNextQuestion = () => {
-    const nextQuestionId = questions && questions[currentIndex! + 1].id;
+    const nextQuestionId = questions && questions[currentIndex + 1].id;
+    setCurrentIndex(currentIndex + 1);
     navigate(`/question/${nextQuestionId}`);
   };
 
@@ -33,7 +31,7 @@ function Question() {
   const isLastIndex = questions && currentIndex === questions?.length - 1;
   const handleMoveResultPage = () => {
     // todo : Result 페이지 이동시 로딩 스피너 및 시간 (2초?) 구현
-    navigate("/result");
+    navigate(`/result`);
   };
 
   if (loading) {
@@ -43,7 +41,8 @@ function Question() {
   return (
     <>
       <QuestionContainer
-        currentIndex={currentIndex!}
+        currentIndex={currentIndex}
+        setCurrentIndex={setCurrentIndex}
         isLastIndex={isLastIndex}
       />
       {isLastIndex ? (

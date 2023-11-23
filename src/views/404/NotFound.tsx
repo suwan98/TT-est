@@ -1,7 +1,11 @@
-function NotFound() {
+interface INotFoundProps {
+  error: Error;
+}
+
+function NotFound({error}: INotFoundProps) {
   return (
     <>
-      <div>NotFound</div>
+      <div>{error!.message}</div>
     </>
   );
 }
