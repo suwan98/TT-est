@@ -17,8 +17,7 @@ interface IQuestionContainerProps {
 }
 
 interface QuestionState {
-  FScore: number;
-  TScore: number;
+  [key: string]: number;
   questionIndex: number;
 }
 
@@ -45,6 +44,12 @@ function QuestionContainer({
 
   /* 질문 로딩 시간 로직 구성 */
 
+  /* localStorge 총합 점수 저장 */
+  const totalScore = questionState.TScore - questionState.FScore;
+  useEffect(() => {
+    localStorage.setItem("totalScore", totalScore.toString());
+  }, [totalScore]);
+
   /* 버튼 클릭시 점수 추가 및 다음 질문으로 이동 */
   const navigate = useNavigate();
   const handleClickChoiceButton = (type: string, id: string) => () => {
@@ -55,6 +60,7 @@ function QuestionContainer({
       questionIndex: prevState.questionIndex + 1,
     }));
     setCurrentIndex((prevIndex) => prevIndex + 1);
+
     navigate(`/question/${id}`);
   };
 

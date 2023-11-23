@@ -7,11 +7,12 @@ import {CONFIRM_MESSAGE} from "@/constants/constants";
 function QuestionContainerFooter() {
   const iconColor = "#c4c4c6";
 
-  /* 첫화면으로 이동 */
+  /* 첫화면으로 이동 및 로컬스토리지 데이터 초기화 */
   const navigate = useNavigate();
   const handleMoveHome = () => {
     if (confirm(CONFIRM_MESSAGE)) {
       navigate("/");
+      localStorage.removeItem("totalScore");
     }
   };
 
