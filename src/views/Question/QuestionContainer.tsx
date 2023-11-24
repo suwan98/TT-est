@@ -1,6 +1,6 @@
 import useFireStoreData from "@/hooks/useFireStoreData";
 import {useEffect, useState} from "react";
-import {useNavigate, useParams} from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 import SpeechBubbleStart from "./SpeechBubbleStart";
 import SpeechBubbleEnd from "./SppechBubbleEnd";
 import ChoiceButton from "@/components/common/ChoiceButton";
@@ -9,7 +9,8 @@ import {useRecoilValue} from "recoil";
 import {themeState} from "@/recoil/theme";
 import numberToKorean from "@/utils/numberToKorean.js";
 import {KOREAN_NUMBER_UNITS} from "@/constants/constants";
-import Swal from "sweetalert2";
+import {shuffleArray} from "@/utils/shuffleArray";
+import showAlert from "@/utils/showAlert";
 
 interface IQuestionContainerProps {
   currentIndex: number;
@@ -62,18 +63,19 @@ function QuestionContainer({
 
     /*  마지막 질문인 경우 totalScore만 증가하고 다른 페이지로 이동하지 않음 */
     if (isLastIndex) {
-      Swal.fire({
-        icon: "error",
-        title: "마지막 질문입니다!",
-        customClass: {
-          confirmButton: "bg-[#759cbe]",
-        },
-      });
-      return;
+      showAlert("error", "마지막 질문입니다!");
     } else {
       setCurrentIndex((prevIndex) => prevIndex + 1);
       navigate(`/question/${id}`);
     }
+  };
+
+  /* 무작위로 섞인 선택지들을 렌더링하는 함수 */
+  const shuffleQuestionChoices = () => {
+    const choices = questions[questionIndex].choices;
+    const choicesKeys = Object.keys(choices);
+    const shuffledKeys = shuffleArray(choicesKeys);
+    return shuffledKeys.map((key) => ({key, choice: choices[key]}));
   };
 
   return (
@@ -94,7 +96,30 @@ function QuestionContainer({
               <SpeechBubbleStart chatText={questions[questionIndex].question} />
               <SpeechBubbleEnd chatAnswer={questions[questionIndex].answer} />
               <div className="mt-20">
-                <ChoiceButton
+                {shuffleQuestionChoices().map(({key, choice}) => (
+                  <ChoiceButton
+                    key={key}
+                    onClick={handleClickChoiceButton(
+                      key,
+                      questions[questionIndex].id
+                    )}>
+                    {choice}
+                  </ChoiceButton>
+                ))}
+              </div>
+            </li>
+          </ul>
+        )}
+        <QuestionContainerFooter />
+      </div>
+    </>
+  );
+}
+
+export default QuestionContainer;
+
+{
+  /* <ChoiceButton
                   onClick={handleClickChoiceButton(
                     "T",
                     questions[questionIndex].id
@@ -107,15 +132,5 @@ function QuestionContainer({
                     questions[questionIndex].id
                   )}>
                   {questions[questionIndex].choices.F}
-                </ChoiceButton>
-              </div>
-            </li>
-          </ul>
-        )}
-        <QuestionContainerFooter />
-      </div>
-    </>
-  );
+                </ChoiceButton> */
 }
-
-export default QuestionContainer;

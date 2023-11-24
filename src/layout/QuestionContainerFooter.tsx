@@ -20,7 +20,7 @@ function QuestionContainerFooter() {
 
       cancelButtonColor: "#3085d6",
       confirmButtonText: "네 처음으로 돌아갈래요!",
-      cancelButtonText: "아니요 그대로 진행할게요!",
+      cancelButtonText: "그대로 진행할게요!",
     }).then((result) => {
       if (result.isConfirmed) {
         navigate("/");

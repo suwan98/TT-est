@@ -21,21 +21,32 @@ function Question() {
   };
 
   /* 질문 로딩 시간 로직 구성 */
-  const [loading] = useLoadingDelay(true);
+  const [loading] = useLoadingDelay(true, 300);
 
   useEffect(() => {
     fetchQuestion(questionId!);
   }, [questionId]);
 
   /* 마지막 질문 상태 */
+  const [loadingResult, setLoadingResult] = useState(false);
   const isLastIndex = questions && currentIndex === questions?.length - 1;
   const handleMoveResultPage = () => {
-    // todo : Result 페이지 이동시 로딩 스피너 및 시간 (2초?) 구현
-    navigate(`/result`);
+    setLoadingResult(true);
+    setTimeout(() => {
+      navigate(`/result`);
+    }, 700);
   };
 
-  if (loading) {
-    return <Loading loadingText="로봇이 질문을 운반중입니다..🤖" />;
+  if (loading || loadingResult) {
+    return (
+      <Loading
+        loadingText={
+          !loadingResult
+            ? "로봇이 질문을 운반중입니다..🤖"
+            : "로봇이 질문을 분석중입니다..🤖"
+        }
+      />
+    );
   }
 
   return (
