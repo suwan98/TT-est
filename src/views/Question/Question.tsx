@@ -5,6 +5,7 @@ import useFireStoreData from "@/hooks/useFireStoreData";
 import {useEffect, useState} from "react";
 import useLoadingDelay from "@/hooks/useLoadingDelay";
 import Loading from "../Loading/Loading";
+import LoadingResult from "../Loading/LoadingResult";
 
 function Question() {
   const navigate = useNavigate();
@@ -14,11 +15,6 @@ function Question() {
   const {questions, fetchQuestion} = useFireStoreData();
 
   const [currentIndex, setCurrentIndex] = useState(0);
-  const handleMoveNextQuestion = () => {
-    const nextQuestionId = questions && questions[currentIndex + 1].id;
-    setCurrentIndex(currentIndex + 1);
-    navigate(`/question/${nextQuestionId}`);
-  };
 
   /* 질문 로딩 시간 로직 구성 */
   const [loading] = useLoadingDelay(true, 300);
@@ -28,25 +24,21 @@ function Question() {
   }, [questionId]);
 
   /* 마지막 질문 상태 */
-  const [loadingResult, setLoadingResult] = useState(false);
   const isLastIndex = questions && currentIndex === questions?.length - 1;
+  const [loadingResult, setLoadingResut] = useState(false);
   const handleMoveResultPage = () => {
-    setLoadingResult(true);
+    setLoadingResut(true);
     setTimeout(() => {
       navigate(`/result`);
-    }, 700);
+    }, 3000);
   };
 
-  if (loading || loadingResult) {
-    return (
-      <Loading
-        loadingText={
-          !loadingResult
-            ? "로봇이 질문을 운반중입니다..🤖"
-            : "로봇이 질문을 분석중입니다..🤖"
-        }
-      />
-    );
+  if (loading) {
+    return <Loading loadingText="로봇이 질문을 운반중입니다..🤖" />;
+  }
+
+  if (loadingResult) {
+    return <LoadingResult />;
   }
 
   return (
