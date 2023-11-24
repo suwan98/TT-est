@@ -1,4 +1,4 @@
-import useFireStoreData from "@/hooks/useFireStoreData";
+import useFireStoreData from "@/api/useFireStoreData";
 import {useEffect, useState} from "react";
 import {useNavigate} from "react-router-dom";
 import SpeechBubbleStart from "./SpeechBubbleStart";
@@ -11,6 +11,7 @@ import numberToKorean from "@/utils/numberToKorean.js";
 import {KOREAN_NUMBER_UNITS} from "@/constants/constants";
 import {shuffleArray} from "@/utils/shuffleArray";
 import showAlert from "@/utils/showAlert";
+import LoadingResult from "../Loading/LoadingResult";
 
 interface IQuestionContainerProps {
   currentIndex: number;
@@ -37,7 +38,8 @@ function QuestionContainer({
   });
 
   /* 구조분해할당 */
-  const {questionIndex} = questionState;
+  const {questionIndex, TScore, FScore} = questionState;
+  const selectedQuestion = questions && questions[questionIndex];
 
   /* theme에 따른 Container 배경색 수정 */
   const containerTheme = useRecoilValue(themeState);
@@ -47,7 +49,7 @@ function QuestionContainer({
   /* 질문 로딩 시간 로직 구성 */
 
   /* localStorge 총합 점수 저장 */
-  const totalScore = questionState.TScore - questionState.FScore;
+  const totalScore = TScore - FScore;
   useEffect(() => {
     localStorage.setItem("totalScore", totalScore.toString());
   }, [totalScore]);
@@ -63,7 +65,11 @@ function QuestionContainer({
 
     /*  마지막 질문인 경우 totalScore만 증가하고 다른 페이지로 이동하지 않음 */
     if (isLastIndex) {
-      showAlert("error", "마지막 질문입니다!");
+      showAlert(
+        "error",
+        "마지막 질문입니다!",
+        "분석결과 확인하기 버튼을 눌러보세요"
+      );
     } else {
       setCurrentIndex((prevIndex) => prevIndex + 1);
       navigate(`/question/${id}`);
@@ -72,16 +78,18 @@ function QuestionContainer({
 
   /* 무작위로 섞인 선택지들을 렌더링하는 함수 */
   const shuffleQuestionChoices = () => {
-    const choices = questions[questionIndex].choices;
+    const choices = selectedQuestion.choices;
     const choicesKeys = Object.keys(choices);
     const shuffledKeys = shuffleArray(choicesKeys);
     return shuffledKeys.map((key) => ({key, choice: choices[key]}));
   };
 
+  /* */
+
   return (
     <>
       <div
-        className={`flex flex-col items-center relative justify-center p-4 h-[40rem] w-[40rem] rounded-t-3xl border overflow-y-auto ${isDarkMode} border-b-0`}>
+        className={`flex flex-col items-center relative justify-center p-4 h-[50rem] w-[40rem] rounded-t-3xl border overflow-y-auto ${isDarkMode} border-b-0`}>
         <p className="font-dote text-2xl pb-4">
           {!isLastIndex
             ? ` ${numberToKorean(
@@ -90,19 +98,16 @@ function QuestionContainer({
               )}번째 질문`
             : "마지막 질문"}
         </p>
-        {questions && questions[questionIndex] && (
-          <ul key={questions[questionIndex].id}>
+        {selectedQuestion && (
+          <ul key={selectedQuestion.id}>
             <li>
-              <SpeechBubbleStart chatText={questions[questionIndex].question} />
-              <SpeechBubbleEnd chatAnswer={questions[questionIndex].answer} />
+              <SpeechBubbleStart chatText={selectedQuestion.question} />
+              <SpeechBubbleEnd chatAnswer={selectedQuestion.answer} />
               <div className="mt-20">
                 {shuffleQuestionChoices().map(({key, choice}) => (
                   <ChoiceButton
                     key={key}
-                    onClick={handleClickChoiceButton(
-                      key,
-                      questions[questionIndex].id
-                    )}>
+                    onClick={handleClickChoiceButton(key, selectedQuestion.id)}>
                     {choice}
                   </ChoiceButton>
                 ))}
@@ -117,20 +122,3 @@ function QuestionContainer({
 }
 
 export default QuestionContainer;
-
-{
-  /* <ChoiceButton
-                  onClick={handleClickChoiceButton(
-                    "T",
-                    questions[questionIndex].id
-                  )}>
-                  {questions[questionIndex].choices.T}
-                </ChoiceButton>
-                <ChoiceButton
-                  onClick={handleClickChoiceButton(
-                    "F",
-                    questions[questionIndex].id
-                  )}>
-                  {questions[questionIndex].choices.F}
-                </ChoiceButton> */
-}

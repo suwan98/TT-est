@@ -31,7 +31,6 @@
     font-family: Pretendard;
     font-size: 1rem;
     letter-spacing: 0.65px;
-    font-display: swap;
     @screen tablet {
       font-size: 0.875rem;
     }

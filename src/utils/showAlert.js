@@ -1,9 +1,10 @@
 import Swal from "sweetalert2";
 
-const showAlert = (icon, title) => {
+const showAlert = (icon, title, text) => {
   Swal.fire({
     icon: icon,
     title: title,
+    text: text,
     customClass: {
       confirmButton: "bg-[#759cbe]",
     },

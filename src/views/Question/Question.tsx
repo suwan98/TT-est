@@ -1,7 +1,7 @@
 import {useNavigate, useParams} from "react-router-dom";
 import QuestionContainer from "./QuestionContainer";
 import Button from "./../../components/common/Button";
-import useFireStoreData from "@/hooks/useFireStoreData";
+import useFireStoreData from "@/api/useFireStoreData";
 import {useEffect, useState} from "react";
 import useLoadingDelay from "@/hooks/useLoadingDelay";
 import Loading from "../Loading/Loading";

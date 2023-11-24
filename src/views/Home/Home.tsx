@@ -1,12 +1,12 @@
 import Button from "@/components/common/Button";
 import {useNavigate} from "react-router-dom";
-import ShareButtons from "./ShareButtons";
 import HomeBackGround from "@/assets/img/home-background.png";
 import {useRecoilValue} from "recoil";
 import {themeState} from "@/recoil/theme";
-import useFireStoreData from "@/hooks/useFireStoreData";
+import useFireStoreData from "@/api/useFireStoreData";
 import ShareButton from "@/components/common/ShareButton";
 import NotFound from "../404/NotFound";
+import Swal from "sweetalert2";
 
 function Home() {
   /* theme 적용 */
@@ -29,6 +29,12 @@ function Home() {
   const handleCopyURL = async () => {
     try {
       await navigator.clipboard.writeText(location.href);
+      Swal.fire({
+        title: "링크가 복사되었습니다",
+        timer: 3000,
+        confirmButtonText: "확인",
+        confirmButtonColor: "#2563eb",
+      });
     } catch (error) {
       return <NotFound error={error} />;
     }

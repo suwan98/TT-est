@@ -12,7 +12,7 @@ function QuestionContainerFooter() {
   const navigate = useNavigate();
   const handleMoveHome = () => {
     Swal.fire({
-      title: "경고 📢",
+      title: "경고",
       text: CONFIRM_MESSAGE,
       icon: "warning",
       showCancelButton: true,
