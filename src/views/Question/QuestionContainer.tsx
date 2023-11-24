@@ -9,6 +9,7 @@ import {useRecoilValue} from "recoil";
 import {themeState} from "@/recoil/theme";
 import numberToKorean from "@/utils/numberToKorean.js";
 import {KOREAN_NUMBER_UNITS} from "@/constants/constants";
+import Swal from "sweetalert2";
 
 interface IQuestionContainerProps {
   currentIndex: number;
@@ -53,15 +54,26 @@ function QuestionContainer({
   /* 버튼 클릭시 점수 추가 및 다음 질문으로 이동 */
   const navigate = useNavigate();
   const handleClickChoiceButton = (type: string, id: string) => () => {
-    if (isLastIndex) return;
     setQuestionState((prevState) => ({
       ...prevState,
       [`${type}Score`]: prevState[`${type}Score`] + 1,
       questionIndex: prevState.questionIndex + 1,
     }));
-    setCurrentIndex((prevIndex) => prevIndex + 1);
 
-    navigate(`/question/${id}`);
+    /*  마지막 질문인 경우 totalScore만 증가하고 다른 페이지로 이동하지 않음 */
+    if (isLastIndex) {
+      Swal.fire({
+        icon: "error",
+        title: "마지막 질문입니다!",
+        customClass: {
+          confirmButton: "bg-[#759cbe]",
+        },
+      });
+      return;
+    } else {
+      setCurrentIndex((prevIndex) => prevIndex + 1);
+      navigate(`/question/${id}`);
+    }
   };
 
   return (
@@ -76,7 +88,7 @@ function QuestionContainer({
               )}번째 질문`
             : "마지막 질문"}
         </p>
-        {questions && (
+        {questions && questions[questionIndex] && (
           <ul key={questions[questionIndex].id}>
             <li>
               <SpeechBubbleStart chatText={questions[questionIndex].question} />
@@ -107,8 +119,3 @@ function QuestionContainer({
 }
 
 export default QuestionContainer;
-
-// ${numberToKorean(
-//     currentIndex + 1,
-//     KOREAN_NUMBER_UNITS
-//   )}

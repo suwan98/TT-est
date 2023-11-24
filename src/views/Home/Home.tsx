@@ -5,11 +5,13 @@ import HomeBackGround from "@/assets/img/home-background.png";
 import {useRecoilValue} from "recoil";
 import {themeState} from "@/recoil/theme";
 import useFireStoreData from "@/hooks/useFireStoreData";
+import ShareButton from "@/components/common/ShareButton";
+import NotFound from "../404/NotFound";
 
 function Home() {
   /* theme 적용 */
   const theme = useRecoilValue(themeState);
-  const lightTheme = "bg-[#222222] text-white hover:bg-black";
+  const lightTheme = "bg-black text-white hover:bg-[#696969]";
   const blackTheme = "bg-[#fff6f6] text-black hover:bg-[#ffffff]";
   const buttonTheme = theme === "light" ? lightTheme : blackTheme;
 
@@ -21,6 +23,15 @@ function Home() {
   const navigate = useNavigate();
   const handleMoveQuestionPage = (id: string | null) => () => {
     navigate(`/question/${id}`);
+  };
+
+  /* Copy 버튼 클릭 시 링크 복사 */
+  const handleCopyURL = async () => {
+    try {
+      await navigator.clipboard.writeText(location.href);
+    } catch (error) {
+      return <NotFound error={error} />;
+    }
   };
 
   return (
@@ -40,7 +51,11 @@ function Home() {
         className={`${buttonTheme} border-none my-6 rounded-lg p-5 font-alice font-bold shadow-2xl`}>
         T력 테스트하러 가기!
       </Button>
-      <ShareButtons />
+      <div className="flex gap-3">
+        <ShareButton iconType="kakao" />
+        <ShareButton iconType="twitter" />
+        <ShareButton iconType="copy" onClick={handleCopyURL} />
+      </div>
     </>
   );
 }

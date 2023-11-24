@@ -23,7 +23,7 @@ function ShareButton({iconType, ...restProps}: IShareButton) {
   return (
     <>
       <button
-        className={`inline-flex items-center justify-center border border-transparent focus:outline-none rounded-full p-3 drop-shadow-[1] transition-all ${shareButtonBackGroundColor[iconType]}`}
+        className={`inline-flex items-center justify-center border border-transparent focus:outline-none rounded-full p-3 ${shareButtonBackGroundColor[iconType]}`}
         {...restProps}>
         {icons[iconType]}
       </button>

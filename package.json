@@ -16,6 +16,7 @@
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.17.0",
     "styled-components": "^6.1.0",
+    "sweetalert2": "^11.10.1",
     "tailwindcss": "^3.3.3"
   },
   "devDependencies": {

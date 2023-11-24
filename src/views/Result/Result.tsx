@@ -14,15 +14,23 @@ function Result() {
   const totalScore = parseInt(localStorage.getItem("totalScore"), 10);
   const resultText = (() => {
     switch (totalScore) {
+      case 6:
+      case 5:
       case 4:
         return <div>당신은 T 군요</div>;
       case 3:
-        return <div>당신은 T 80프로군요</div>;
       case 2:
-        return <div>당신은 F 60프로군요</div>;
+        return <div>당신은 T 80프로군요</div>;
       case 1:
+      case 0:
+        return <div>당신은 F 60프로군요</div>;
+      case -1:
+      case -2:
+      case -3:
         return <div>당신은 F 40프로군요</div>;
-
+      case -4:
+      case -5:
+        return <div>당신은 F 80프로 군요</div>;
       default:
         return <div> 당신은 완전히 F입니다</div>;
     }

@@ -45,15 +45,11 @@ function Question() {
         setCurrentIndex={setCurrentIndex}
         isLastIndex={isLastIndex}
       />
-      {isLastIndex ? (
+      {isLastIndex && (
         <Button
           className="mt-6 border p-4 bg-[#e5e8eb] rounded-2xl text-[##888a8d] hover:bg-[#ced1d3] w-[40rem] font-semibold text-2xl"
           onClick={handleMoveResultPage}>
           분석결과 확인하기
-        </Button>
-      ) : (
-        <Button className="mt-6" onClick={handleMoveNextQuestion}>
-          다음 질문으로 이동!
         </Button>
       )}
     </>
