@@ -36,7 +36,7 @@ function Home() {
         confirmButtonColor: "#2563eb",
       });
     } catch (error) {
-      return <NotFound error={error} />;
+      return <NotFound />;
     }
   };
 
