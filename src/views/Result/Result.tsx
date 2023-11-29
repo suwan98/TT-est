@@ -31,7 +31,6 @@ function Result() {
   });
 
   /* 카카오톡 링크 결과 공유 */
-
   const handleShareResultKaKao = () => {
     if (window.Kakao) {
       const kakao = window.Kakao;
@@ -52,6 +51,13 @@ function Result() {
         },
       });
     }
+  };
+
+  /* 트위터 공유 */
+  const handleShareResultTwitter = () => {
+    const link = window.location.href;
+    const twiiterIntent = `https://twitter.com/intent/tweet?text=custom%20text&url=${link}`;
+    window.open(twiiterIntent, "_blank");
   };
 
   /* 결과물 복사 */
@@ -87,7 +93,7 @@ function Result() {
       </Button>
       <div className="flex gap-3">
         <ShareButton iconType="kakao" onClick={handleShareResultKaKao} />
-        <ShareButton iconType="twitter" />
+        <ShareButton iconType="twitter" onClick={handleShareResultTwitter} />
         <ShareButton iconType="copy" onClick={handleCopy} />
       </div>
     </>
