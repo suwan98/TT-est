@@ -1,11 +1,12 @@
 import Button from "@/components/common/Button";
 import {useNavigate} from "react-router-dom";
-import ShareButtons from "../Home/ShareButtons";
 import F100 from "@/assets/img/result-image/F100.jpeg";
 import TResult from "@/assets/img/result-image/T-result-image.jpg";
 import {useRecoilValue} from "recoil";
 import {themeState} from "@/recoil/theme";
 import getScoreResult from "@/core/scoreResult";
+import ShareButton from "@/components/common/ShareButton";
+import Swal from "sweetalert2";
 
 function Result() {
   /* 첫화면으로 이동 및 로컬스토리지 데이터 초기화 */
@@ -16,7 +17,7 @@ function Result() {
   };
 
   /* 종합점수에 따른 데이터 조건부 렌더링 */
-  const totalScore = parseInt(localStorage.getItem("totalScore"), 10);
+  const totalScore = parseInt(localStorage.getItem("totalScore")!, 10);
 
   const theme = useRecoilValue(themeState);
   const lightTheme = "bg-black text-white hover:bg-[#696969]";
@@ -28,6 +29,45 @@ function Result() {
     TResult,
     FResult: F100,
   });
+
+  /* 카카오톡 링크 결과 공유 */
+
+  const handleShareResultKaKao = () => {
+    if (window.Kakao) {
+      const kakao = window.Kakao;
+      if (!kakao.isInitialized()) {
+        kakao.init(import.meta.env.VITE_KAKAO_APIKEY);
+      }
+      /* 카카오톡 링크 보내기 */
+      kakao.Share.sendDefault({
+        objectType: "feed",
+        content: {
+          title: "결과 공유",
+          description: resultContent.text,
+          imageUrl: resultContent.imageSrc,
+          link: {
+            mobileWebUrl: window.location.href,
+            webUrl: window.location.href,
+          },
+        },
+      });
+    }
+  };
+
+  /* 결과물 복사 */
+  const handleCopy = async () => {
+    try {
+      await navigator.clipboard.writeText(resultContent.text);
+      Swal.fire({
+        title: "결과가 복사되었습니다",
+        timer: 3000,
+        confirmButtonText: "확인",
+        confirmButtonColor: "#2563eb",
+      });
+    } catch (error) {
+      console.log("🎆 error:", error);
+    }
+  };
 
   return (
     <>
@@ -45,7 +85,11 @@ function Result() {
         className={`${buttonTheme} border-none my-6 rounded-lg p-5 font-alice font-bold shadow-2xl`}>
         처음으로 돌아가기
       </Button>
-      <ShareButtons />
+      <div className="flex gap-3">
+        <ShareButton iconType="kakao" onClick={handleShareResultKaKao} />
+        <ShareButton iconType="twitter" />
+        <ShareButton iconType="copy" onClick={handleCopy} />
+      </div>
     </>
   );
 }

@@ -1,5 +1,5 @@
 interface INotFoundProps {
-  error: Error;
+  error?: Error;
 }
 
 function NotFound({error}: INotFoundProps) {
