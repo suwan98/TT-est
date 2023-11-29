@@ -25,6 +25,28 @@ function Home() {
     navigate(`/question/${id}`);
   };
 
+  /* 카카오톡 링크  공유 */
+  const handleShareResultKaKao = () => {
+    if (window.Kakao) {
+      const kakao = window.Kakao;
+      if (!kakao.isInitialized()) {
+        kakao.init(import.meta.env.VITE_KAKAO_APIKEY);
+      }
+      /* 카카오톡 링크 보내기 */
+      kakao.Share.sendScrap({
+        requestUrl: "http://localhost:3000",
+        templateId: 101361,
+      });
+    }
+  };
+
+  /* 트위터 공유 */
+  const handleShareResultTwitter = () => {
+    const link = window.location.href;
+    const twiiterIntent = `https://twitter.com/intent/tweet?text=custom%20text&url=${link}`;
+    window.open(twiiterIntent, "_blank");
+  };
+
   /* Copy 버튼 클릭 시 링크 복사 */
   const handleCopyURL = async () => {
     try {
@@ -58,8 +80,8 @@ function Home() {
         T력 테스트하러 가기!
       </Button>
       <div className="flex gap-3">
-        <ShareButton iconType="kakao" />
-        <ShareButton iconType="twitter" />
+        <ShareButton iconType="kakao" onClick={handleShareResultKaKao} />
+        <ShareButton iconType="twitter" onClick={handleShareResultTwitter} />
         <ShareButton iconType="copy" onClick={handleCopyURL} />
       </div>
     </>
