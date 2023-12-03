@@ -1,9 +1,10 @@
-import {ReactNode} from "react";
+import {MouseEventHandler, ReactNode} from "react";
 import Button from "./Button";
 
 interface IChoiceButton {
   children: ReactNode;
-  restProps: unknown[];
+  onClick?: MouseEventHandler<HTMLButtonElement>;
+  restProps?: unknown[];
 }
 
 function ChoiceButton({children, ...restProps}: IChoiceButton) {

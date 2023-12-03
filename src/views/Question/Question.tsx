@@ -27,10 +27,13 @@ function Question() {
   const isLastIndex = questions && currentIndex === questions?.length - 1;
   const [loadingResult, setLoadingResut] = useState(false);
   const handleMoveResultPage = () => {
+    if (!isLastIndex) {
+      throw new Error("마지막 질문 선택해야겠쥐?");
+    }
     setLoadingResut(true);
     setTimeout(() => {
       navigate(`/result`);
-    }, 3000);
+    }, 2500);
   };
 
   if (loading) {

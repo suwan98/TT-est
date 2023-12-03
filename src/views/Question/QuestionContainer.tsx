@@ -1,5 +1,5 @@
 import useFireStoreData from "@/api/useFireStoreData";
-import {useEffect, useState} from "react";
+import {Dispatch, SetStateAction, useEffect, useState} from "react";
 import {useNavigate} from "react-router-dom";
 import SpeechBubbleStart from "./SpeechBubbleStart";
 import SpeechBubbleEnd from "./SppechBubbleEnd";
@@ -11,12 +11,11 @@ import numberToKorean from "@/utils/numberToKorean.js";
 import {KOREAN_NUMBER_UNITS} from "@/constants/constants";
 import {shuffleArray} from "@/utils/shuffleArray";
 import showAlert from "@/utils/showAlert";
-import LoadingResult from "../Loading/LoadingResult";
 
 interface IQuestionContainerProps {
   currentIndex: number;
   isLastIndex: boolean | null;
-  setCurrentIndex: () => void;
+  setCurrentIndex: Dispatch<SetStateAction<number>>;
 }
 
 interface QuestionState {
@@ -78,7 +77,7 @@ function QuestionContainer({
 
   /* 무작위로 섞인 선택지들을 렌더링하는 함수 */
   const shuffleQuestionChoices = () => {
-    const choices = selectedQuestion.choices;
+    const choices = selectedQuestion!.choices;
     const choicesKeys = Object.keys(choices);
     const shuffledKeys = shuffleArray(choicesKeys);
     return shuffledKeys.map((key) => ({key, choice: choices[key]}));
@@ -90,7 +89,7 @@ function QuestionContainer({
     <>
       <div
         className={`flex flex-col items-center relative justify-center p-4 h-[50rem] w-[40rem] rounded-t-3xl border overflow-y-auto ${isDarkMode} border-b-0`}>
-        <p className="font-dote text-2xl pb-4">
+        <p className="font-dote text-3xl mb-12">
           {!isLastIndex
             ? ` ${numberToKorean(
                 currentIndex + 1,
