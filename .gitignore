@@ -24,7 +24,4 @@ dist-ssr
 *.sln
 *.sw?
 
-.firebasesrc
-firebase.json
-firestore.indexes.json
-firestore.rules
+
