@@ -43,8 +43,6 @@
 - React Router를 통한 라우팅기능
 - FireBase/FireStore 내부 데이터 렌더링
 - 결과 소셜미디어 공유하기 기능
-- 구글 애널리틱스
-- AWS 도메인 설정
 
 <br />
 
